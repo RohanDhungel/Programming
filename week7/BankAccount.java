@@ -1,48 +1,52 @@
 class BankAccount {
-    int accountNumber;
-    String accountHolder;
-    int balance;
 
-    BankAccount(int accountNumber, String accountHolder, int balance) {
+    int accountNumber;
+    String holderName;
+    double balance;
+
+    BankAccount(int accountNumber, String holderName, double balance) {
         this.accountNumber = accountNumber;
-        this.accountHolder = accountHolder;
+        this.holderName = holderName;
         this.balance = balance;
     }
 
-    void deposit(int amount) {
+    void deposit(double amount) {
         balance = balance + amount;
-        System.out.println("Deposited: " + amount);
+        System.out.println(holderName + " deposited: $" + amount);
     }
 
-    void withdraw(int amount) {
-        if (amount > balance)
-            System.out.println("Not enough balance!");
-        else {
+    void withdraw(double amount) {
+        if (amount > balance) {
+            System.out.println("Not enough balance for " + holderName);
+        } else {
             balance = balance - amount;
-            System.out.println("Withdrawn: " + amount);
+            System.out.println(holderName + " withdrew: $" + amount);
         }
     }
 
-    void display() {
-        System.out.println("Account No: " + accountNumber);
-        System.out.println("Holder: " + accountHolder);
-        System.out.println("Balance: " + balance);
-        System.out.println();
+    void displayBalance() {
+        System.out.println("Account No : " + accountNumber);
+        System.out.println("Name       : " + holderName);
+        System.out.println("Balance    : $" + balance);
+        System.out.println("-------------------");
     }
 }
 
-class MainClass {
+public class MainClass {
+
     public static void main(String[] args) {
 
-        BankAccount b1 = new BankAccount(101, "Ali", 5000);
-        BankAccount b2 = new BankAccount(102, "Sara", 3000);
+        BankAccount account1 = new BankAccount(1001, "Alice", 5000);
+        BankAccount account2 = new BankAccount(1002, "Bob", 3000);
 
-        b1.display();
-        b1.deposit(1000);
-        b1.withdraw(500);
-        b1.display();
+        account1.deposit(1000);
+        account1.withdraw(500);
 
-        b2.display();
-        b2.withdraw(5000);
+        account2.deposit(700);
+        account2.withdraw(4000);  
+
+        System.out.println("\n--- Final Balance ---");
+        account1.displayBalance();
+        account2.displayBalance();
     }
 }
